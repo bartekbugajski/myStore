@@ -16,13 +16,47 @@ class ItemsSearchController: UICollectionViewController, UICollectionViewDelegat
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
-      
-        
+
+        fetchU2videos()
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .vertical
-           
         }
- 
+    
+    }
+    
+    fileprivate func fetchU2videos() {
+        let urlString = "https://itunes.apple.com/search?term=U2&entity=musicVideo"
+        guard let url = URL(string: urlString) else { return }
+        //fetch data from the internet
+        URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            
+            if let err = err {
+                print("Failed to fetch apps:", err)
+                return
+            }
+            
+            //success
+            //            print(data)
+            //            print(String(data: data!, encoding: .utf8))
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
+                
+                searchResult.results.forEach({print($0.trackName, $0.artistName)})
+                
+            } catch let jsonErr {
+                
+                print("Failed to decode: json:", jsonErr)
+                
+            }
+            
+            
+            
+            }.resume() //fires of request
+        
         
     }
     
@@ -46,10 +80,10 @@ class ItemsSearchController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultCell
         
         cell.layer.cornerRadius = 6.0
-        
+        cell.nameLabel.text = "Here's my text label"
         
         /*
         cell.layoutMargins.left = 20.0

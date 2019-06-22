@@ -12,7 +12,9 @@ class SearchResultCell: UICollectionViewCell {
     
     let itemIconImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .red
+        let borderColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        iv.layer.borderWidth = 1.0
+        iv.layer.borderColor = borderColor.cgColor
         iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
         iv.layer.cornerRadius = 12
@@ -21,22 +23,19 @@ class SearchResultCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Item's name"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
-    let categoryLabel: UILabel = {
+    let trackNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Categories"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
-    let ratingsLabel: UILabel = {
+    let genreLabel: UILabel = {
         let label = UILabel()
-        label.text = "5 stars"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
@@ -46,7 +45,9 @@ class SearchResultCell: UICollectionViewCell {
     
     func createScreenshotImageView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
+        let borderColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        imageView.layer.borderWidth = 0.4
+        imageView.layer.borderColor = borderColor.cgColor
         imageView.layer.cornerRadius = 12
         return imageView
     }
@@ -57,19 +58,19 @@ class SearchResultCell: UICollectionViewCell {
         button.setTitle("GET", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.backgroundColor = UIColor(white: 0.92, alpha: 1)
+        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
         button.layer.cornerRadius = 12
-        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(white: 0.96, alpha: 1)
+        backgroundColor = UIColor(white: 1, alpha: 1)
     
         let infoStackView = UIStackView(arrangedSubviews: [
-            itemIconImageView, VerticalStackView(arrangedSubviews: [nameLabel, categoryLabel, ratingsLabel]), getButton
+            itemIconImageView, VerticalStackView(arrangedSubviews: [nameLabel, trackNameLabel, genreLabel]), getButton
             ])
         infoStackView.spacing = 16
         infoStackView.alignment = .center

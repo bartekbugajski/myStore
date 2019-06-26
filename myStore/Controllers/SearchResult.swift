@@ -17,4 +17,6 @@ struct Result: Decodable {
     let trackName: String
     let artistName: String
     let primaryGenreName: String
+    let artworkUrl100: String //video icon
+    let screenshotUrls: [String]
 }

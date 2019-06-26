@@ -10,32 +10,50 @@ import UIKit
 
 class SearchResultCell: UICollectionViewCell {
     
+    var appResult: Result! {
+        didSet {
+        nameLabel.text = appResult.trackName
+        artistLabel.text = appResult.artistName
+        genreLabel.text = appResult.primaryGenreName
+        
+        let url = URL(string: appResult.artworkUrl100)
+        itemIconImageView.sd_setImage(with: url)
+        screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
+        if appResult.screenshotUrls.count > 1 {
+        screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
+        }
+        if appResult.screenshotUrls.count > 2 {
+        screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
+        }
+        }
+    }
+    
     let itemIconImageView: UIImageView = {
         let iv = UIImageView()
-        let borderColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        iv.layer.borderWidth = 1.0
-        iv.layer.borderColor = borderColor.cgColor
-        iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.layer.cornerRadius = 12
+        iv.layer.borderWidth = 0.5
+        iv.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+        iv.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        iv.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        iv.layer.cornerRadius = 9
+        iv.clipsToBounds = true
         return iv
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
-    let trackNameLabel: UILabel = {
+    let artistLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
     let genreLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
     
@@ -45,10 +63,11 @@ class SearchResultCell: UICollectionViewCell {
     
     func createScreenshotImageView() -> UIImageView {
         let imageView = UIImageView()
-        let borderColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         imageView.layer.borderWidth = 0.4
-        imageView.layer.borderColor = borderColor.cgColor
-        imageView.layer.cornerRadius = 12
+        imageView.layer.borderColor =  UIColor(white: 0.5, alpha: 0.5).cgColor
+        imageView.layer.cornerRadius = 9
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }
     
@@ -70,7 +89,7 @@ class SearchResultCell: UICollectionViewCell {
         backgroundColor = UIColor(white: 1, alpha: 1)
     
         let infoStackView = UIStackView(arrangedSubviews: [
-            itemIconImageView, VerticalStackView(arrangedSubviews: [nameLabel, trackNameLabel, genreLabel]), getButton
+            itemIconImageView, VerticalStackView(arrangedSubviews: [nameLabel, artistLabel, genreLabel]), getButton
             ])
         infoStackView.spacing = 16
         infoStackView.alignment = .center

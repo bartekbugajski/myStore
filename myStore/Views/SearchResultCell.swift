@@ -15,18 +15,17 @@ class SearchResultCell: UICollectionViewCell {
         nameLabel.text = appResult.trackName
         artistLabel.text = appResult.artistName
         genreLabel.text = appResult.primaryGenreName
-        
-        let url = URL(string: appResult.artworkUrl100)
-        itemIconImageView.sd_setImage(with: url)
-        screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
-        if appResult.screenshotUrls.count > 1 {
-        screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
         }
-        if appResult.screenshotUrls.count > 2 {
-        screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
+//        let url = URL(string: appResult.artworkUrl100)
+////        itemIconImageView.sd_setImage(with: url)
+////        screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
+////        if appResult.screenshotUrls.count > 1 {
+////        screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
+////        }
+////        if appResult.screenshotUrls.count > 2 {
+////        screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
+//        }
         }
-        }
-    }
     
     let itemIconImageView: UIImageView = {
         let iv = UIImageView()

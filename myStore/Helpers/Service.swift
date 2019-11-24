@@ -14,7 +14,7 @@ class Service {
     func fetchScreenshots(searchTerm: String, completion: @escaping ([Result], Error?) -> ()) {
             print("Fetching iTunes apps from Service layer")
             
-            let urlString = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software"
+            let urlString = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software" //\(searchTerm)
             guard let url = URL(string: urlString) else { return }
             //fetch data from the internet
             URLSession.shared.dataTask(with: url) { (data, resp, err) in
@@ -39,8 +39,7 @@ class Service {
                     
                 }
                 
-                
-                
+
                 }.resume() //fires of request
             
         }
